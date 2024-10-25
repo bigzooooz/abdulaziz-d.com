@@ -1,4 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100">
     <rect width="100%" height="100%" fill="white"/>
     <animate onbegin="alert(document.domain)" />
+        <script>
+        <![CDATA[
+            setTimeout(function(){alert(document.domain)}, 0);
+        ]]>
+    </script>
 </svg>
