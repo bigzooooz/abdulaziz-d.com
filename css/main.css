@@ -1582,8 +1582,13 @@ textarea.form-control, textarea.form-control:focus {
 .portfolio-item-img {
   position: relative;
   overflow: hidden;
+  min-height: 200px;
 }
-
+.portfolio-item-img > img {
+  width:100%;
+  height:100%;
+  margin: 20% auto;
+}
 .portfolio-grid figure .portfolio-item-img:after {
   content: '';
   position: absolute;
