@@ -1,0 +1,492 @@
+{
+  "siteMeta": {
+    "title": "Abdulaziz Alshehri",
+    "subtitle": "Bug Hunter & Web Developer",
+    "description": "Abdulaziz Alshehri - Personal Resume & Portfolio",
+    "keywords": [
+      "Abdulaziz Alshehri",
+      "عبدالعزيز الشهري",
+      "عبدالعزيز",
+      "سعد",
+      "programming",
+      "coding",
+      "development",
+      "saudi",
+      "arabia",
+      "bigzooooz",
+      "b4zb0z",
+      "@bigzooooz",
+      "@b4zb0z"
+    ],
+    "url": "https://abdulaziz-d.com",
+    "image": "https://abdulaziz-d.com/img/main_photo.png",
+    "owner": {
+      "name": "Abdulaziz Alshehri",
+      "alternateNames": [
+        "bigzooooz",
+        "b4zb0z",
+        "BiGZoOoZ",
+        "Abdulaziz Saad",
+        "Abdulaziz Alshehri"
+      ],
+      "location": "Jeddah, Saudi Arabia",
+      "email": "me@abdulaziz-d.com",
+      "phone": "+966568052503",
+      "birthDate": "1993-11"
+    },
+    "social": {
+      "linkedin": "https://www.linkedin.com/in/b4zb0z",
+      "twitter": "https://twitter.com/b4zb0z",
+      "github": "https://github.com/bigzooooz/",
+      "website": "https://abdulaziz-d.com",
+      "cve": "https://bigzooooz.github.io/CVE/"
+    }
+  },
+  "about": {
+    "summary": "I’m a cybersecurity and full-stack developer with over five years of experience building and securing web applications and systems. I specialize in penetration testing, web application security, Linux server administration, and secure backend development using Laravel, PHP, and Python, with a strong focus on OWASP best practices. My work bridges offensive security and software engineering, finding vulnerabilities, fixing them at the code level, and designing systems that are resilient, scalable, and secure by design.",
+    "roles": [
+      "Web Developer",
+      "Bug Hunter",
+      "Business Owner",
+      "Problem Solver",
+      "Coder",
+      "Critical Thinker"
+    ],
+    "services": [
+      {
+        "title": "Web Development",
+        "description": "I have extensive experience in both large and small-scale professional web development projects. I excel at creating dynamic and user-friendly websites that meet the specific requirements of clients."
+      },
+      {
+        "title": "Web Servers",
+        "description": "I possess the knowledge and expertise to effectively manage Virtual Private Servers (VPS) and Linux-based web servers. By ensuring their proper configuration and maintenance, I guarantee smooth operations and optimal performance for websites."
+      },
+      {
+        "title": "Bug Hunting",
+        "description": "I actively participate in multiple bug bounty platforms as a skilled security researcher. Through my expertise, I conduct freelance web vulnerability assessments and effectively identify and mitigate potential security threats."
+      },
+      {
+        "title": "Technical Consultancy",
+        "description": "I offer valuable technical consultancy services to businesses, providing them with state-of-the-art solutions tailored to their specific needs. My experience and knowledge enable me to guide organizations towards robust and secure web applications."
+      }
+    ],
+    "testimonials": [
+      {
+        "text": "Abdulaziz is one of outstanding people you can met during your professional life. He was a remarkable person completing his tasks with perfect timing and outcome. He was always willing to learn new things and improve the process using his great skills on computer and programming to serve work needs. I am confidently recommended Abdulaziz for his technical and personal skills and wish him great future.",
+        "author": "Waleed Alahmadi",
+        "position": "Operation Support Manager, NWC"
+      },
+      {
+        "text": "A young professional with talents. A result-oriented person. Great leadership potentials. A team player.",
+        "author": "Abdulrahman Shahbar",
+        "position": "CEO, WarshaPlus"
+      },
+      {
+        "text": "Honest and professional at work, i am happy to work with",
+        "author": "Naif Bin Jahlan",
+        "position": "COO, WarshaPlus"
+      },
+      {
+        "text": "ambitious, hardworking and fast learner.",
+        "author": "Eng. Hani Basaffar",
+        "position": "Head of OCC, NWC"
+      }
+    ]
+  },
+  "contact": {
+    "email": "me@abdulaziz-d.com",
+    "phone": "+966568052503",
+    "location": "Jeddah, Saudi Arabia",
+    "availability": [
+      "Remote",
+      "On-site",
+      "Freelance",
+      "Security Consulting"
+    ]
+  },
+  "languages": [
+    {
+      "language": "Arabic",
+      "proficiency": "Native or Bilingual Proficiency"
+    },
+    {
+      "language": "English",
+      "proficiency": "Professional Working Proficiency"
+    }
+  ],
+  "securityPositioning": {
+    "primaryTitle": "Cybersecurity Specialist",
+    "secondaryTitles": [
+      "Penetration Tester",
+      "Security Researcher",
+      "Bug Bounty Hunter"
+    ],
+    "standards": [
+      "OWASP Top 10"
+    ]
+  },
+  "achievements": [
+    {
+      "metric": "CVEs Discovered",
+      "value": 17,
+      "description": "Discovered and responsibly disclosed 17 CVEs contributing to security patches for enterprise and cloud-based applications."
+    }
+  ],
+  "skills": {
+    "technical": [
+      {
+        "name": "PHP",
+        "level": 85
+      },
+      {
+        "name": "Javascript",
+        "level": 75
+      },
+      {
+        "name": "HTML/CSS",
+        "level": 90
+      },
+      {
+        "name": "Python",
+        "level": 45
+      },
+      {
+        "name": "Linux Systems",
+        "level": 65
+      },
+      {
+        "name": "Web Security",
+        "level": 70
+      },
+      {
+        "name": "Bug Hunting",
+        "level": 55
+      }
+    ],
+    "knowledges": [
+      "Web Development",
+      "Web Hacking",
+      "Web-based Systems",
+      "Linux Systems",
+      "Fullstack Development",
+      "Social Media",
+      "Time Management",
+      "Communication",
+      "Problem-Solving",
+      "Flexibility"
+    ]
+  },
+  "experience": [
+    {
+      "company": "Najah Association",
+      "role": "Web Developer",
+      "location": "Saudi Arabia",
+      "startDate": "2024",
+      "endDate": "2026",
+      "period": "2024 - 2026",
+      "responsibilities": [
+        "Optimized Laravel-based internal portals, improving backend performance and maintainability.",
+        "Implemented OWASP-compliant security practices to mitigate common web vulnerabilities."
+      ]
+    },
+    {
+      "company": "32Personalities",
+      "role": "Web Developer",
+      "location": "Remote",
+      "startDate": "2021",
+      "endDate": "2022",
+      "period": "2021 - 2022",
+      "responsibilities": [
+        "Designed and maintained a scalable backend serving over 100,000 monthly user interactions.",
+        "Strengthened API security and implemented data encryption best practices."
+      ]
+    },
+    {
+      "company": "Takamul Platform",
+      "role": "Web Developer",
+      "location": "Saudi Arabia",
+      "startDate": "2020",
+      "endDate": "2020",
+      "period": "2020"
+    },
+    {
+      "company": "CBX Unit LLC",
+      "role": "Web Developer",
+      "location": "Jeddah, Saudi Arabia",
+      "startDate": "2018",
+      "endDate": "2020",
+      "period": "2018 - 2020",
+      "responsibilities": [
+        "Developed an MVP blockchain-based secure transaction system.",
+        "Built intuitive user interfaces for account management and authentication."
+      ]
+    },
+    {
+      "company": "WarshaPlus",
+      "role": "Web Developer",
+      "location": "Jeddah, Saudi Arabia",
+      "startDate": "2018",
+      "endDate": "2018",
+      "period": "2018",
+      "responsibilities": [
+        "Led full-stack development of an automotive e-commerce platform.",
+        "Integrated secure payment gateways and third-party shipping APIs."
+      ]
+    },
+    {
+      "company": "NWC",
+      "role": "SCADA Operator",
+      "location": "Jeddah, Saudi Arabia",
+      "startDate": "2016",
+      "endDate": "2017",
+      "period": "2016 - 2017",
+      "responsibilities": [
+        "Monitored water network systems in 24/7 rotating shifts.",
+        "Ensured operational continuity through real-time analysis and team coordination."
+      ]
+    },
+    {
+      "company": "NWC",
+      "role": "Customer Service Representative",
+      "location": "Jeddah, Saudi Arabia",
+      "startDate": "2013",
+      "endDate": "2013",
+      "period": "2013"
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Cybersecurity Incident Response Analysis",
+      "issuer": "Misk Foundation",
+      "credentialId": "VC-3L0RITPM",
+      "date": "July, 2025",
+      "badgeUrl": "https://upload.wikimedia.org/wikipedia/ar/thumb/a/af/MiSK_Foundation_logo.svg/960px-MiSK_Foundation_logo.svg.png?20171109093755",
+      "certificateUrl": "./img/1752731205079.jpg"
+    },
+    {
+      "name": "SOC Level 1",
+      "issuer": "TryHackMe",
+      "date": "May, 2025",
+      "year": 2025,
+      "credentialId": "THM-UIO2TVHDAD",
+      "certificateUrl":"https://tryhackme.com/certificate/THM-UIO2TVHDAD",
+      "badgeUrl": "https://tryhackme.com/favicon.svg"
+    },
+    {
+      "name": "eJPT - Junior Penetration Tester",
+      "issuer": "INE",
+      "credentialId": "94547095",
+      "date": "Feb, 2024",
+      "year": 2024,
+      "badgeUrl": "img/eJPT.png",
+      "certificateUrl": "https://pdf.credential.net/kiccwzdo_1707738328015.pdf"
+    },
+    {
+      "name": "Certified Foundations Associate",
+      "issuer": "Oracle Cloud Infrastructure",
+      "date": "Sep, 2023",
+      "year": 2023,
+      "badgeUrl": "https://brm-workforce.oracle.com/pdf/certview/images/OU_Generic_Badge.png",
+      "certificateUrl": "https://abdulaziz-d.com/img/eCertificate.pdf"
+    },
+    {
+      "name": "ICCA - INE Certified Cloud Associate",
+      "issuer": "INE",
+      "credentialId": "81523342",
+      "date": "June, 2023",
+      "year": 2023,
+      "badgeUrl": "img/ICCA-badge.png",
+      "certificateUrl": "https://pdf.credential.net/rtnxv9za_1707739866151.pdf"
+    },
+    {
+      "name": "Jr. Penetration Tester",
+      "issuer": "TryHackMe",
+      "date": "Jan, 2022",
+      "year": 2022,
+      "badgeUrl": "https://tryhackme.com/favicon.svg",
+      "certificateUrl": "https://tryhackme.com/certificate/THM-PNSVIX6TLM",
+      "credentialId": "THM-PNSVIX6TLM"
+    },
+    {
+      "name": "Offensive Pentesting",
+      "issuer": "TryHackMe",
+      "date": "Jan, 2022",
+      "year": 2022,
+      "badgeUrl": "https://tryhackme.com/favicon.svg",
+      "certificateUrl": "https://tryhackme.com/certificate/THM-UFH4TTC3YP",
+      "credentialId": "TTHM-UFH4TTC3YP"
+    }
+  ],
+  "honorsAndAwards": [
+    {
+      "title": "Security Hall of Fame Recognition",
+      "issuer": "University of Texas at Austin",
+      "date": "Apr 2023",
+      "year": 2023,
+      "priority": "high",
+      "description": "Recognized for discovering and responsibly disclosing a Reflected Cross-Site Scripting (XSS) vulnerability affecting web applications, helping improve security controls and reduce client-side attack risks.",
+      "image": "https://security.utexas.edu/android-chrome-512x512.png",
+      "link": ""
+    },
+    {
+      "title": "Security Hall of Fame Recognition",
+      "issuer": "University of Texas at Austin",
+      "date": "Feb 2023",
+      "year": 2023,
+      "priority": "high",
+      "description": "Acknowledged for identifying a separate Reflected XSS vulnerability, providing clear reproduction steps and impact analysis that supported timely remediation and strengthened overall application security.",
+      "image": "https://security.utexas.edu/android-chrome-512x512.png",
+      "link": ""
+    },
+    {
+      "title": "Certificate of Appreciation: Laravel Dev.",
+      "issuer": "WarshaPlus",
+      "date": "Sep 2018",
+      "year": 2018,
+      "description": "Awarded a Certificate of Appreciation by WarshaPlus in recognition of Laravel development work, focusing on API integration with Payment Gateways, SMS services, Shipping couriers, and various improvements before transitioning to Drupal.",
+      "image": "img/cert_logos/warshaplus.png",
+      "link": ""
+    },
+    {
+      "title": "Certificate of Appreciation: Drupal Dev.",
+      "issuer": "WarshaPlus",
+      "date": "Sep 2018",
+      "year": 2018,
+      "description": "Awarded a Certificate of Appreciation by WarshaPlus in recognition of contributions to the development and launch of the company's new website using Drupal, acknowledging technical expertise and successful project delivery.",
+      "image": "img/cert_logos/warshaplus.png",
+      "link": ""
+    },
+    {
+      "title": "Certificate of Participation – Hajj Hackathon",
+      "issuer": "Saudi Federation for Cybersecurity, Programming and Drones (SFCSP)",
+      "date": "Aug 2018",
+      "year": 2018,
+      "description": "Participant in the Hajj Hackathon, a record-breaking global event bringing together thousands of developers from over 100 countries to develop innovative solutions for the Hajj pilgrimage.",
+      "image": "img/cert_logos/hajj-hackathon.png",
+      "link": ""
+    },
+    {
+      "title": "Certificate of Participation – Hajj Hackathon",
+      "issuer": "Guinness World Records",
+      "date": "Aug 2018",
+      "year": 2018,
+      "description": "Participant in the Hajj Hackathon, a record-breaking global event officially recognized by Guinness World Records for the largest hackathon by attendance, bringing together thousands of developers from over 100 countries.",
+      "image": "img/cert_logos/guinness.png",
+      "link": ""
+    }
+  ],
+  "clients": [
+    {
+      "name": "Saudia Technic",
+      "image": "img/clients/saudia_technic.png",
+      "projectUrl": "./projects/saudiatechnic.html",
+      "tag": "Development"
+    },
+    {
+      "name": "Najah Association",
+      "image": "https://najah-h.sa/employee/images/logo.png",
+      "projectUrl": "./projects/najah.html",
+      "tag": "Development"
+    },
+    {
+      "name": "Social Development Bank",
+      "image": "https://dga.gov.sa/sites/default/files/2023-02/%D8%A8%D9%86%D9%83%20%D8%A7%D9%84%D8%AA%D9%86%D9%85%D9%8A%D8%A9%20%D8%A7%D9%84%D8%A7%D8%AC%D8%AA%D9%85%D8%A7%D8%B9%D9%8A%D8%A9.png",
+      "projectUrl": "./projects/sdb.html",
+      "tag": "Development"
+    },
+    {
+      "name": "MHNDM",
+      "image": "./img/clients/mhndm-logo.png",
+      "projectUrl": "./projects/mhndm.html",
+      "tag": "Development"
+    },
+    {
+      "name": "32 Personalities",
+      "image": "https://charma.app/wp-content/uploads/2023/06/cropped-Group-63486.png",
+      "projectUrl": "./projects/32personalities.html",
+      "tag": "Development"
+    },
+    {
+      "name": "Lapalma",
+      "image": "./img/clients/lapalma.png",
+      "projectUrl": "./projects/lapalma.html",
+      "tag": "Security"
+    },
+    {
+      "name": "Muhide",
+      "image": "https://muhide.com/wp-content/uploads/2024/08/footer-logo.svg",
+      "projectUrl": "./projects/muhide.html",
+      "tag": "Security"
+    },
+    {
+      "name": "Matchy Uniforms",
+      "image": "./img/clients/matchy.png",
+      "projectUrl": "./projects/matchy.html",
+      "tag": "Development"
+    },
+    {
+      "name": "AHSC.org.sa",
+      "image": "https://ahsc.org.sa/web/image/website/1/logo/%D8%AC%D9%85%D8%B9%D9%8A%D8%A9%20%D8%A7%D9%84%D8%AE%D8%AF%D9%85%D8%A7%D8%AA%20%D8%A7%D9%84%D8%A5%D9%86%D8%B3%D8%A7%D9%86%D9%8A%D8%A9%20%D8%A8%D9%85%D8%B1%D9%83%D8%B2%20%D8%A7%D9%84%D9%85%D9%86%D8%A7%D8%AE?unique=69afc7b",
+      "projectUrl": "./projects/ahsc.html",
+      "tag": "Server Management"
+    },
+    {
+      "name": "Facility Solutions",
+      "image": "./img/clients/FacilitySolutions-logo.png",
+      "projectUrl": "./projects/facility-solutions.html",
+      "tag": "Development"
+    },
+    {
+      "name": "MBSRenders",
+      "image": "./img/clients/mbsrenders-logo.png",
+      "projectUrl": "./projects/mbsrenders.html",
+      "tag": "Development"
+    },
+    {
+      "name": "HadeelStudio",
+      "image": "./img/clients/hadeelstudio-logo.png",
+      "projectUrl": "./projects/hadeelstudio.html",
+      "tag": "Development"
+    },
+    {
+      "name": "CBX Unit",
+      "image": "./img/clients/cbx-logo.png",
+      "projectUrl": "./projects/cbx-unit.html",
+      "tag": "Development"
+    }
+  ],
+  "projectsAndTools": [
+    {
+      "name": "KeyHunter",
+      "description": "Python tool designed to discover API key leaks from subdomains and archived URLs. It performs subdomain enumeration using Subfinder, fetches URLs from Wayback Machine, and scans the content for API keys using regex patterns defined in a YAML file",
+      "repository": "https://github.com/bigzooooz/KeyHunter",
+      "image": "img/KeyHunter.png",
+      "language": "Python 3"
+    },
+    {
+      "name": "XSScanner.py",
+      "description": "Python tool designed to identify potential Cross-Site Scripting (XSS) vulnerabilities in PHP files. It recursively scans specified directories for PHP files, analyzing code for common XSS patterns by identifying potentially vulnerable source and sink combinations. The tool can also test remote targets by injecting a payload and checking the response.",
+      "repository": "https://github.com/bigzooooz/XSScanner",
+      "image": "img/tools/XSScanner.png",
+      "language": "Python 3"
+    }
+  ],
+  "badges": [
+    {
+      "name": "eJPT",
+      "image": "img/eJPT.png",
+      "url": "https://pdf.credential.net/kiccwzdo_1707738328015.pdf"
+    },
+    {
+      "name": "ICCA",
+      "image": "img/ICCA-badge.png",
+      "url": "https://pdf.credential.net/rtnxv9za_1707739866151.pdf"
+    },
+    {
+      "name": "Guinness World Records",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Guinness_World_Records_Logo_2024.svg/2048px-Guinness_World_Records_Logo_2024.svg.png",
+      "url": "#honors"
+    }
+  ]
+}
+
