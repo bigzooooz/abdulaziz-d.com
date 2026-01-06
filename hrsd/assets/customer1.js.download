@@ -1,1 +1,0 @@
-var __sl_matchers=[{protocol:/^(http|https)$/,host:/^sso\.hrsd\.gov\.sa$/,path:/^\/Auth\/Login\/$/i,method:'post'},{protocol:/^(http|https)$/,host:/^sso\.hrsd\.gov\.sa$/,path:/^\/Auth\/ForgetPassword$/i,method:'post'},{protocol:/^(http|https)$/,host:/^sso\.hrsd\.gov\.sa$/,path:/^\/Auth\/Register\/$/i,method:'post'}];
