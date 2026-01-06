@@ -43,7 +43,7 @@
     }
   },
   "about": {
-    "summary": "I’m a cybersecurity and full-stack developer with over five years of experience building and securing web applications and systems. I specialize in penetration testing, web application security, Linux server administration, and secure backend development using Laravel, PHP, and Python, with a strong focus on OWASP best practices. My work bridges offensive security and software engineering, finding vulnerabilities, fixing them at the code level, and designing systems that are resilient, scalable, and secure by design.",
+    "summary": "I’m a cybersecurity and full-stack developer with 10+ years of experience building and securing web applications and systems. I specialize in penetration testing, web application security, Linux server administration, and secure backend development using Laravel, PHP, and Python, with a strong focus on OWASP best practices. My work bridges offensive security and software engineering, finding vulnerabilities, fixing them at the code level, and designing systems that are resilient, scalable, and secure by design.",
     "roles": [
       "Web Developer",
       "Bug Hunter",
