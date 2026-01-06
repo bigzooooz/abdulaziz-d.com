@@ -457,7 +457,7 @@
     },
     {
       "name": "XSScanner.py",
-      "description": "Python tool designed to identify potential Cross-Site Scripting (XSS) vulnerabilities in PHP files. It recursively scans specified directories for PHP files, analyzing code for common XSS patterns by identifying potentially vulnerable source and sink combinations. The tool can also test remote targets by injecting a payload and checking the response.",
+      "description": "Python tool designed to identify potential Cross-Site Scripting (XSS) vulnerabilities in PHP files. It recursively scans specified directories for PHP files, analyzing code for common XSS patterns by identifying potentially vulnerable source and sink combinations.",
       "repository": "https://github.com/bigzooooz/XSScanner",
       "image": "img/tools/XSScanner.png",
       "language": "Python 3"
