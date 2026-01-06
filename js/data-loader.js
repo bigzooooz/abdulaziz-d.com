@@ -91,8 +91,8 @@
     function populateHome() {
         const data = siteData.siteMeta;
         
-        // Home title
-        $('.title-block h2').text(data.owner.name);
+        // Home title (h1 for SEO)
+        $('.title-block h1').text(data.owner.name);
 
         // Roles carousel
         const carousel = $('.text-rotation');
@@ -128,7 +128,7 @@
         const data = siteData.about;
         const contact = siteData.contact;
 
-        // About summary
+        // About summary (plain text for now - internal links can be added manually if needed)
         $('section[data-id="about-me"] .col-xs-12.col-sm-7 p').text(data.summary);
 
         // Contact info
@@ -417,20 +417,78 @@
     // Update meta tags
     function updateMetaTags() {
         const data = siteData.siteMeta;
+        const knowledges = siteData.knowledges || [];
         
         // Update title
-        document.title = `${data.owner.name} - ${data.subtitle}`;
+        const pageTitle = `${data.owner.name} - ${data.subtitle}`;
+        document.title = pageTitle;
         
         // Update meta description
         $('meta[name="description"]').attr('content', data.description);
         
+        // Update meta keywords (join array)
+        const keywordsStr = Array.isArray(data.keywords) ? data.keywords.join(', ') : data.keywords;
+        $('meta[name="keywords"]').attr('content', keywordsStr);
+        
         // Update Open Graph tags
+        $('meta[property="og:url"]').attr('content', data.url);
         $('meta[property="og:title"]').attr('content', `${data.owner.name} | ${data.subtitle}`);
         $('meta[property="og:description"]').attr('content', data.description);
+        $('meta[property="og:image"]').attr('content', data.image);
         
         // Update Twitter tags
+        $('meta[property="twitter:url"]').attr('content', data.url);
         $('meta[property="twitter:title"]').attr('content', `${data.owner.name} | ${data.subtitle}`);
         $('meta[property="twitter:description"]').attr('content', data.description);
+        $('meta[property="twitter:image"]').attr('content', data.image);
+        
+        // Update Person structured data (JSON-LD)
+        const personStructuredData = {
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": data.owner.name,
+            "alternateName": data.owner.alternateNames || [],
+            "url": data.url,
+            "image": data.image,
+            "jobTitle": data.subtitle,
+            "sameAs": [
+                data.social.linkedin,
+                data.social.twitter,
+                data.social.github
+            ].filter(Boolean), // Remove empty values
+            "knowsAbout": knowledges,
+            "description": data.description,
+            "email": data.owner.email,
+            "telephone": data.owner.phone,
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": data.owner.location
+            }
+        };
+        
+        // Update WebSite structured data (JSON-LD)
+        const websiteStructuredData = {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": data.owner.name + " - Portfolio",
+            "url": data.url,
+            "description": data.description,
+            "author": {
+                "@type": "Person",
+                "name": data.owner.name
+            },
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": {
+                    "@type": "EntryPoint",
+                    "urlTemplate": data.url + "/#clients"
+                },
+                "query-input": "required name=search_term_string"
+            }
+        };
+        
+        $('#structured-data-person').text(JSON.stringify(personStructuredData, null, 2));
+        $('#structured-data-website').text(JSON.stringify(websiteStructuredData, null, 2));
     }
 
     // Initialize immediately when script loads

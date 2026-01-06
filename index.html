@@ -18,52 +18,62 @@
 
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Abdulaziz Alshehri - Personal Resume & Portfolio</title>
+    <title>Abdulaziz Alshehri - Bug Hunter & Web Developer</title>
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, maximum-scale=1"
     />
     <meta
       name="description"
-      content="Abdulaziz Alshehri - Personal Resume & Portfolio"
+      id="meta-description"
+      content="Abdulaziz Alshehri - Personal Resume & Portfolio. Cybersecurity specialist and full-stack developer with 10+ years of experience in penetration testing, web application security, and Linux system administration."
     />
     <meta
       name="keywords"
-      content="Abdulaziz Alshehri,عبدالعزيز الشهري, عبدالعزيز, سعد, programming, coding, development, saudi, arabia, bigzooooz, b4zb0z, @bigzooooz, @b4zb0z"
+      id="meta-keywords"
+      content="Abdulaziz Alshehri, عبدالعزيز الشهري, عبدالعزيز, سعد, programming, coding, development, saudi, arabia, bigzooooz, b4zb0z, @bigzooooz, @b4zb0z"
     />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://abdulaziz-d.com" />
+    <meta property="og:url" id="og-url" content="https://abdulaziz-d.com" />
     <meta
       property="og:title"
-      content="Abdulaziz S. Alshehri | Full-stack Developer & Bug Hunter"
+      id="og-title"
+      content="Abdulaziz Alshehri | Bug Hunter & Web Developer"
     />
     <meta
       property="og:description"
-      content="Explore the portfolio and services of Abdulaziz S. Alshehri, an experienced Full-stack Developer and Bug Hunter."
+      id="og-description"
+      content="Abdulaziz Alshehri - Personal Resume & Portfolio. Cybersecurity specialist and full-stack developer with 10+ years of experience in penetration testing, web application security, and Linux system administration."
     />
     <meta
       property="og:image"
+      id="og-image"
       content="https://abdulaziz-d.com/img/main_photo.png"
     />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://abdulaziz-d.com" />
+    <meta property="twitter:url" id="twitter-url" content="https://abdulaziz-d.com" />
     <meta
       property="twitter:title"
-      content="Abdulaziz S. Alshehri | Full-stack Developer & Bug Hunter"
+      id="twitter-title"
+      content="Abdulaziz Alshehri | Bug Hunter & Web Developer"
     />
     <meta
       property="twitter:description"
-      content="Abdulaziz S. Alshehri specializes in full-stack development and bug hunting. See his portfolio for custom, secure web applications."
+      id="twitter-description"
+      content="Abdulaziz Alshehri - Personal Resume & Portfolio. Cybersecurity specialist and full-stack developer with 10+ years of experience in penetration testing, web application security, and Linux system administration."
     />
     <meta
       property="twitter:image"
+      id="twitter-image"
       content="https://abdulaziz-d.com/img/main_photo.png"
     />
 
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://abdulaziz-d.com/" />
 
     <link rel="shortcut icon" href="img/main_photo.png" />
     <link rel="stylesheet" href="css/reset.css" type="text/css" />
@@ -76,38 +86,41 @@
 
     <script src="js/modernizr.custom.js"></script>
 
-    <script type="application/ld+json">
+    <script type="application/ld+json" id="structured-data-person">
       {
         "@context": "https://schema.org",
         "@type": "Person",
-        "name": "Abdulaziz S. Alshehri",
-        "alternateName": [
-          "bigzooooz",
-          "b4zb0z",
-          "BiGZoOoZ",
-          "Abdulaziz Saad",
-          "Abdulaziz Alshehri"
-        ],
+        "name": "Abdulaziz Alshehri",
+        "alternateName": ["bigzooooz", "b4zb0z", "BiGZoOoZ", "Abdulaziz Saad", "Abdulaziz Alshehri"],
         "url": "https://abdulaziz-d.com",
         "image": "https://abdulaziz-d.com/img/main_photo.png",
-        "jobTitle": "Full-stack Web Developer & Bug Hunter",
+        "jobTitle": "Bug Hunter & Web Developer",
         "sameAs": [
-          "https://linkedin.com/in/b4zb0z",
-          "https://x.com/b4zb0z",
-          "https://github.com/bigzooooz"
+          "https://www.linkedin.com/in/b4zb0z",
+          "https://twitter.com/b4zb0z",
+          "https://github.com/bigzooooz/"
         ],
-        "knowsAbout": [
-          "Web Development",
-          "Bug Hunting",
-          "Linux Systems",
-          "Fullstack Development",
-          "Cybersecurity",
-          "PHP",
-          "JavaScript",
-          "Python",
-          "HTML/CSS"
-        ],
-        "description": "Abdulaziz Alshehri is an experienced Full-stack Web Developer, Bug Hunter, and Security Consultant, specializing in crafting secure and user-friendly web applications."
+        "knowsAbout": ["Web Development", "Web Hacking", "Web-based Systems", "Linux Systems", "Fullstack Development"],
+        "description": "Abdulaziz Alshehri - Personal Resume & Portfolio",
+        "email": "me@abdulaziz-d.com",
+        "telephone": "+966568052503",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Jeddah, Saudi Arabia"
+        }
+      }
+    </script>
+    <script type="application/ld+json" id="structured-data-website">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Abdulaziz Alshehri - Portfolio",
+        "url": "https://abdulaziz-d.com",
+        "description": "Abdulaziz Alshehri - Personal Resume & Portfolio",
+        "author": {
+          "@type": "Person",
+          "name": "Abdulaziz Alshehri"
+        }
       }
     </script>
   </head>
@@ -210,12 +223,12 @@
         <div class="content-area">
           <div class="animated-sections">
             <!-- Home Subpage -->
-            <section data-id="home" class="animated-section start-page">
+            <section data-id="home" class="animated-section start-page" aria-labelledby="home-heading">
               <div class="section-content vcentered">
                 <div class="row">
                   <div class="col-sm-12 col-md-12 col-lg-12">
                     <div class="title-block">
-                      <h2></h2>
+                      <h1 id="home-heading">Abdulaziz Alshehri</h1>
                       <div class="owl-carousel text-rotation">
                         <!-- Populated from data.json -->
                         </div>
@@ -227,16 +240,16 @@
             <!-- End of Home Subpage -->
 
             <!-- About Me Subpage -->
-            <section data-id="about-me" class="animated-section">
+            <section data-id="about-me" class="animated-section" aria-labelledby="about-heading">
               <div class="page-title">
-                <h2>About <span>Me</span></h2>
+                <h2 id="about-heading">About <span>Me</span></h2>
               </div>
 
               <div class="section-content">
                 <!-- Personal Information -->
                 <div class="row">
                   <div class="col-xs-12 col-sm-7">
-                    <p><!-- Populated from data.json --></p>
+                    <p>I'm a cybersecurity and full-stack developer with 10+ years of experience building and securing web applications and systems. I specialize in penetration testing, web application security, Linux server administration, and secure backend development using Laravel, PHP, and Python, with a strong focus on OWASP best practices. My work bridges offensive security and software engineering, finding vulnerabilities, fixing them at the code level, and designing systems that are resilient, scalable, and secure by design.</p>
                   </div>
 
                   <div class="col-xs-12 col-sm-5">
@@ -249,17 +262,17 @@
 
                         <li>
                           <span class="title">Residence</span>
-                          <span class="value"><!-- Populated from data.json --></span>
+                          <span class="value">Jeddah, Saudi Arabia</span>
                         </li>
 
                         <li>
                           <span class="title">Email</span>
-                          <span class="value"><!-- Populated from data.json --></span>
+                          <span class="value"><a href="mailto:me@abdulaziz-d.com">me@abdulaziz-d.com</a></span>
                         </li>
 
                         <li>
                           <span class="title">Phone</span>
-                          <span class="value"><!-- Populated from data.json --></span>
+                          <span class="value"><a href="tel:+966568052503">+966568052503</a></span>
                         </li>
                       </ul>
                     </div>
@@ -270,10 +283,10 @@
                 <div class="white-space-50"></div>
 
                 <!-- Services -->
-                <div class="row">
+                <div class="row" aria-labelledby="services-heading">
                   <div class="col-xs-12 col-sm-12">
                     <div class="block-title">
-                      <h3>What <span>I Do</span></h3>
+                      <h3 id="services-heading">What <span>I Do</span></h3>
                     </div>
                   </div>
                 </div>
@@ -286,10 +299,10 @@
                 <div class="white-space-30"></div>
 
                 <!-- Testimonials -->
-                <div class="row">
+                <div class="row" aria-labelledby="testimonials-heading">
                   <div class="col-xs-12 col-sm-12">
                     <div class="block-title">
-                      <h3>Testimonials</h3>
+                      <h3 id="testimonials-heading">Testimonials</h3>
                     </div>
                   </div>
                 </div>
@@ -309,16 +322,16 @@
             <!-- End of About Me Subpage -->
 
             <!-- Resume Subpage -->
-            <section data-id="resume" class="animated-section">
+            <section data-id="resume" class="animated-section" aria-labelledby="resume-heading">
               <div class="page-title">
-                <h2>Resume</h2>
+                <h2 id="resume-heading">Resume</h2>
               </div>
 
               <div class="section-content">
                 <div class="row">
                   <div class="col-xs-12 col-sm-7">
                     <div class="block-title">
-                      <h3>Experience</h3>
+                      <h3 id="experience-heading">Experience</h3>
                     </div>
 
                     <div class="timeline timeline-second-style clearfix">
@@ -332,7 +345,7 @@
 
                     <!-- Coding Skills -->
                     <div class="block-title">
-                      <h3>Technical <span>Skills</span></h3>
+                      <h3 id="skills-heading">Technical <span>Skills</span></h3>
                     </div>
 
                     <div class="skills-info skills-second-style">
@@ -344,7 +357,7 @@
 
                     <!-- Knowledges -->
                     <div class="block-title">
-                      <h3>Knowledges</h3>
+                      <h3 id="knowledges-heading">Knowledges</h3>
                     </div>
 
                     <ul class="knowledges">
@@ -358,10 +371,10 @@
                 <div class="white-space-50"></div>
 
                 <!-- Certificates -->
-                <div class="row">
+                <div class="row" aria-labelledby="certificates-heading">
                   <div class="col-xs-12 col-sm-12">
                     <div class="block-title">
-                      <h3>Certificates</h3>
+                      <h3 id="certificates-heading">Certificates</h3>
                     </div>
                   </div>
                 </div>
@@ -374,10 +387,10 @@
             </section>
             <!-- End of Resume Subpage -->
             <!-- Portfolio Subpage -->
-            <section data-id="clients" class="animated-section">
+            <section data-id="clients" class="animated-section" aria-labelledby="clients-heading">
               <div class="section-content">
                 <div class="page-title">
-                  <h2><span>My</span> Clients</h2>
+                  <h2 id="clients-heading"><span>My</span> Clients</h2>
                 </div>
 
                 <div class="row">
@@ -392,9 +405,9 @@
             <!-- End of Portfolio Subpage -->
 
             <!-- Tools Subpage -->
-            <section data-id="tools" class="animated-section">
+            <section data-id="tools" class="animated-section" aria-labelledby="tools-heading">
               <div class="page-title">
-                <h2>Tools I Developed</h2>
+                <h2 id="tools-heading">Tools I Developed</h2>
               </div>
 
               <div class="section-content">
@@ -410,9 +423,9 @@
             <!-- End of Tools Subpage -->
 
             <!-- Honors Subpage -->
-            <section data-id="honors" class="animated-section">
+            <section data-id="honors" class="animated-section" aria-labelledby="honors-heading">
               <div class="page-title">
-                <h2>Honors <span>& Awards</span></h2>
+                <h2 id="honors-heading">Honors <span>& Awards</span></h2>
                       </div>
 
               <div class="section-content">
