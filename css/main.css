@@ -480,15 +480,45 @@ input[type="submit"]:focus {
 .header-buttons {
   margin-top: 50px;
   text-align: center;
+  width: 100%;
 }
 
 .header-buttons .ine-badge{
   text-align: center;
-  display:inline-block;
-  margin: 20px auto;
+  display: inline-block;
+  margin: 10px 5px;
+  vertical-align: middle;
 }
 .header-buttons .ine-badge img{
   height: 100px;
+  background: transparent;
+}
+
+/* Top row container for eJPT and ICCA side by side */
+.header-buttons .ejpt-badge,
+.header-buttons .icca-badge {
+  display: inline-block;
+  margin: 5px;
+  vertical-align: top;
+}
+
+/* Bottom row: Guinness centered below */
+.header-buttons .guinness-badge {
+  background: transparent !important;
+  background-color: transparent !important;
+  padding: 0;
+  display: block;
+  text-align: center;
+  margin: 10px auto 0 auto;
+  clear: both;
+  width: fit-content;
+  max-width: 200px;
+}
+.header-buttons .guinness-badge img {
+  background: transparent !important;
+  background-color: transparent !important;
+  mix-blend-mode: screen;
+  filter: brightness(1.1) contrast(1.1);
 }
 .header-buttons .btn-primary {
   background-color: transparent;
@@ -1444,6 +1474,33 @@ textarea.form-control, textarea.form-control:focus {
   border-radius: 50%;
 }
 
+/* Honors section - uniform logo sizing */
+section[data-id="honors"] .certi-logo {
+  display: table-cell;
+  width: 120px;
+  min-width: 120px;
+  height: 150px;
+  background-color: #444;
+  padding: 20px;
+  vertical-align: middle;
+  text-align: center;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+section[data-id="honors"] .certi-logo img {
+  display: block;
+  width: 80px;
+  height: 80px;
+  max-width: 80px;
+  max-height: 80px;
+  min-width: 80px;
+  min-height: 80px;
+  margin: 0 auto;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
 .certi-content {
   display: table-cell;
   width: 100%;
@@ -1719,6 +1776,44 @@ textarea.form-control, textarea.form-control:focus {
   transition: all .3s ease-in-out;
 }
 
+/* Client logos size constraints */
+section[data-id="clients"] .blog-card .media-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+}
+
+section[data-id="clients"] .blog-card .media-block img {
+  max-width: 100%;
+  max-height: 200px;
+  min-height: 80px;
+  min-width: 80px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  margin: 0 auto;
+  filter: grayscale(100%) brightness(0.9) contrast(1.2) opacity(0.9);
+  -webkit-filter: grayscale(100%) brightness(0.9) contrast(1.2) opacity(0.9);
+  -webkit-transition: all .3s ease-in-out;
+  -moz-transition: all .3s ease-in-out;
+  -o-transition: all .3s ease-in-out;
+  -ms-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
+}
+
+section[data-id="clients"] .blog-card .media-block:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+section[data-id="clients"] .blog-card .media-block:hover img {
+  filter: grayscale(0%) brightness(1) contrast(1) opacity(1);
+  -webkit-filter: grayscale(0%) brightness(1) contrast(1) opacity(1);
+}
+
 .blog-card .media-block:hover img {
   transform: scale(1.1);
 }
@@ -1924,6 +2019,26 @@ textarea.form-control, textarea.form-control:focus {
   margin-bottom: 20px;
 }
 
+.portfolio-page-carousel .item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  max-height: 800px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 8px;
+}
+
+.portfolio-page-carousel .item img {
+  max-width: 100%;
+  max-height: 800px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
 .project-description {
   display: block;
   position: relative;
@@ -1953,6 +2068,29 @@ textarea.form-control, textarea.form-control:focus {
 
 .project-general-info p {
   margin: 0;
+}
+
+.project-features {
+  list-style: none;
+  padding: 0;
+  margin: 15px 0;
+}
+
+.project-features li {
+  margin: 8px 0;
+  padding-left: 20px;
+  position: relative;
+  color: #d5d5d5;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.project-features li:before {
+  content: "•";
+  color: #04b4e0;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
 }
 
 .share-buttons {
@@ -2511,6 +2649,40 @@ blockquote {
 
 
 @media only screen and (max-width: 768px) {
+  /* Honors mobile layout - stack logo above details */
+  section[data-id="honors"] .certificate-item {
+    display: block;
+    height: auto;
+  }
+
+  section[data-id="honors"] .certi-logo {
+    display: block;
+    width: 100%;
+    height: auto;
+    min-height: 150px;
+    padding: 20px;
+    text-align: center;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    border-bottom-left-radius: 0;
+  }
+
+  section[data-id="honors"] .certi-logo img {
+    width: 80px;
+    height: 80px;
+    max-width: 80px;
+    max-height: 80px;
+    min-width: 80px;
+    min-height: 80px;
+    object-fit: contain;
+  }
+
+  section[data-id="honors"] .certi-content {
+    display: block;
+    width: 100%;
+    padding: 20px 25px;
+  }
+
   .portfolio-grid figure {
     width: 50%;
   }

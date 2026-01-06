@@ -121,7 +121,41 @@
     // On Document Load
     $(document).on('ready', function() {
         $('#date').html(new Date().getFullYear());
-        $('#age').html(new Date().getFullYear() - '1993');
+        
+        // Calculate age accurately using birth date with month
+        function calculateAge(birthDate) {
+            var today = new Date();
+            // Parse birthDate (format: "YYYY-MM")
+            var birthParts = birthDate.split('-');
+            var birthYear = parseInt(birthParts[0], 10);
+            var birthMonth = parseInt(birthParts[1], 10) - 1; // JavaScript months are 0-indexed
+            
+            var age = today.getFullYear() - birthYear;
+            var currentMonth = today.getMonth();
+            
+            // If birthday hasn't occurred this year yet (before birth month), subtract 1
+            // Since we only have month, we assume birthday is on the 1st of the month
+            if (currentMonth < birthMonth) {
+                age--;
+            }
+            // If we're in the birth month, we assume the birthday has passed (since we use 1st as reference)
+            
+            return age;
+        }
+        
+        // Load birth date from data.json and calculate age
+        $.getJSON('data.json', function(data) {
+            if (data.siteMeta && data.siteMeta.owner && data.siteMeta.owner.birthDate) {
+                var age = calculateAge(data.siteMeta.owner.birthDate);
+                $('#age').html(age);
+            } else {
+                // Fallback to old calculation if birthDate not found
+                $('#age').html(new Date().getFullYear() - '1993');
+            }
+        }).fail(function() {
+            // Fallback if data.json fails to load
+            $('#age').html(new Date().getFullYear() - '1993');
+        });
         var movementStrength = 23;
         var height = movementStrength / $(document).height();
         var width = movementStrength / $(document).width();
